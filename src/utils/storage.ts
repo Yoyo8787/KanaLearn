@@ -1,6 +1,6 @@
 import type { KanaCategory, ScriptMode } from '../data/kanaData'
 
-export type Mode = 'learning' | 'quiz' | 'listening'
+export type Mode = 'learning' | 'quiz' | 'listening' | 'settings'
 export type QuizType = 'multiple-choice' | 'input'
 
 export interface UIPreferences {
@@ -9,6 +9,7 @@ export interface UIPreferences {
   selectedCategories: KanaCategory[]
   quizType: QuizType
   speechRate: number
+  darkMode: boolean
 }
 
 export interface KanaStat {
@@ -28,6 +29,7 @@ export const defaultUIPreferences: UIPreferences = {
   selectedCategories: ['basic'],
   quizType: 'multiple-choice',
   speechRate: 1,
+  darkMode: false,
 }
 
 export function loadUIPreferences(): UIPreferences {
@@ -35,10 +37,19 @@ export function loadUIPreferences(): UIPreferences {
     const raw = localStorage.getItem(UI_KEY)
     if (!raw) return defaultUIPreferences
     const parsed = JSON.parse(raw) as Partial<UIPreferences>
+    const systemDark =
+      typeof window !== 'undefined' && typeof window.matchMedia === 'function'
+        ? window.matchMedia('(prefers-color-scheme: dark)').matches
+        : false
+    const selectedCategories = parsed.selectedCategories ?? ['basic']
+    const normalizedCategories = selectedCategories.includes('basic')
+      ? selectedCategories
+      : (['basic', ...selectedCategories] as KanaCategory[])
     return {
       ...defaultUIPreferences,
       ...parsed,
-      selectedCategories: parsed.selectedCategories ?? ['basic'],
+      selectedCategories: normalizedCategories,
+      darkMode: parsed.darkMode ?? systemDark,
     }
   } catch (err) {
     console.warn('Failed to load UI prefs', err)

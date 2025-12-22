@@ -23,6 +23,7 @@ interface QuizQuestion {
   answer: string
 }
 
+// 功能: 測驗元件，根據選擇的書寫系統、分類和測驗類型進行假名測驗
 export function Quiz({
   scriptMode,
   categories,
@@ -38,7 +39,10 @@ export function Quiz({
   const [recentQueue, setRecentQueue] = useState<string[]>([])
   const [userInput, setUserInput] = useState('')
 
-  const pool = useMemo(() => KANA_ITEMS.filter((item) => categories.includes(item.category)), [categories])
+  const pool = useMemo(
+    () => KANA_ITEMS.filter((item) => categories.includes(item.category)),
+    [categories],
+  )
 
   useEffect(() => {
     pickQuestion()
@@ -56,7 +60,9 @@ export function Quiz({
     if (quizType === 'multiple-choice') {
       const others = pool.filter((p) => p.id !== item.id)
       const shuffled = others.sort(() => 0.5 - Math.random()).slice(0, 3)
-      options = [...shuffled, item].map((opt) => (isPromptKana ? opt.romaji : pickScript(opt, scriptMode)))
+      options = [...shuffled, item].map((opt) =>
+        isPromptKana ? opt.romaji : pickScript(opt, scriptMode),
+      )
       options = options.sort(() => 0.5 - Math.random())
     } else {
       options = []
@@ -89,7 +95,8 @@ export function Quiz({
     const correct = normalized === target
     setFeedback(correct ? '答對了！' : `正確答案：${question.answer}`)
     onRecordResult(question.item.id, correct)
-    if (correct && speechSupported) speakJapanese(pickScript(question.item, scriptMode), { rate: speechRate })
+    if (correct && speechSupported)
+      speakJapanese(pickScript(question.item, scriptMode), { rate: speechRate })
   }
 
   const optionsForQuizType: { value: QuizType; label: string }[] = [
@@ -98,15 +105,19 @@ export function Quiz({
   ]
 
   if (pool.length === 0) {
-    return <p className="rounded-lg bg-rose-50 p-4 text-sm text-rose-600">請至少選擇一個類別開始測驗。</p>
+    return (
+      <p className="rounded-lg bg-danger p-4 text-sm text-danger">
+        請至少選擇一個類別開始測驗。
+      </p>
+    )
   }
 
   return (
-    <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-lg">
+    <div className="rounded-2xl border border-secondary bg-secondary p-6 shadow-lg dark:shadow-xl">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div>
-          <p className="text-sm text-slate-500">目前題庫：{pool.length} 題</p>
-          <h3 className="text-2xl font-semibold text-slate-800">測驗</h3>
+          <p className="text-sm text-muted">目前題庫：{pool.length} 題</p>
+          <h3 className="text-2xl font-semibold text-secondary">測驗</h3>
         </div>
         <div className="flex items-center gap-2 text-sm">
           {optionsForQuizType.map((opt) => (
@@ -114,7 +125,9 @@ export function Quiz({
               key={opt.value}
               onClick={() => onChangeQuizType(opt.value)}
               className={`rounded-full px-3 py-1 ${
-                quizType === opt.value ? 'bg-indigo-600 text-white' : 'bg-slate-100 text-slate-700 hover:bg-indigo-50'
+                quizType === opt.value
+                  ? 'bg-primary text-primary'
+                  : 'bg-muted text-secondary hover:bg-primary'
               }`}
             >
               {opt.label}
@@ -125,9 +138,9 @@ export function Quiz({
 
       {question && (
         <div className="mt-6 flex flex-col gap-4">
-          <div className="rounded-xl border border-slate-100 bg-gradient-to-r from-indigo-50 to-white p-6 text-center">
-            <p className="text-sm uppercase tracking-[0.2em] text-indigo-500">題目</p>
-            <div className="mt-2 text-4xl font-bold text-slate-800">{question.prompt}</div>
+          <div className="rounded-xl border border-secondary bg-quiz-gradient p-6 text-center">
+            <p className="text-sm uppercase tracking-[0.2em] text-primary">題目</p>
+            <div className="mt-2 text-4xl font-bold text-secondary">{question.prompt}</div>
           </div>
 
           {quizType === 'multiple-choice' ? (
@@ -136,7 +149,7 @@ export function Quiz({
                 <button
                   key={opt}
                   onClick={() => handleOption(opt)}
-                  className="rounded-xl border border-slate-200 bg-white px-4 py-3 text-lg font-semibold text-slate-800 shadow-sm hover:border-indigo-200 hover:bg-indigo-50"
+                  className="rounded-xl border border-secondary bg-secondary px-4 py-3 text-lg font-semibold text-secondary shadow-sm hover:border-primary hover:bg-primary"
                 >
                   {opt}
                 </button>
@@ -148,18 +161,18 @@ export function Quiz({
                 value={userInput}
                 onChange={(e) => setUserInput(e.target.value)}
                 placeholder="輸入對應的羅馬拼音"
-                className="w-full rounded-xl border border-slate-200 px-4 py-3 text-lg"
+                className="w-full rounded-xl border border-secondary px-4 py-3 text-lg bg-secondary text-secondary"
               />
               <div className="flex flex-wrap gap-2">
                 <button
                   onClick={handleInput}
-                  className="rounded-lg bg-indigo-600 px-4 py-2 text-white shadow hover:bg-indigo-700"
+                  className="rounded-lg bg-primary px-4 py-2 text-primary shadow hover:bg-primary"
                 >
                   確認答案
                 </button>
                 <button
                   onClick={() => setUserInput('')}
-                  className="rounded-lg border border-slate-200 px-4 py-2 text-slate-700 hover:bg-slate-50"
+                  className="rounded-lg border border-secondary px-4 py-2 text-secondary hover:bg-muted"
                 >
                   清除
                 </button>
@@ -170,20 +183,25 @@ export function Quiz({
           <div className="flex flex-wrap items-center gap-3 text-sm">
             <button
               disabled={!speechSupported}
-              onClick={() => question && speakJapanese(pickScript(question.item, scriptMode), { rate: speechRate })}
+              onClick={() =>
+                question &&
+                speakJapanese(pickScript(question.item, scriptMode), { rate: speechRate })
+              }
               className={`rounded-lg px-4 py-2 font-semibold ${
-                speechSupported ? 'bg-emerald-100 text-emerald-700 hover:bg-emerald-200' : 'bg-slate-100 text-slate-500'
+                speechSupported ? 'bg-success hover:bg-success' : 'bg-muted text-muted'
               }`}
             >
               {speechSupported ? '再聽一次' : '瀏覽器不支援語音'}
             </button>
             <button
               onClick={pickQuestion}
-              className="rounded-lg border border-slate-200 px-4 py-2 text-slate-700 hover:bg-slate-50"
+              className="rounded-lg border border-secondary px-4 py-2 text-secondary hover:bg-muted"
             >
               下一題
             </button>
-            {feedback && <span className="text-sm font-semibold text-indigo-600">{feedback}</span>}
+            {feedback && (
+              <span className="text-sm font-semibold text-primary">{feedback}</span>
+            )}
           </div>
         </div>
       )}

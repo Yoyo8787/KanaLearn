@@ -7,10 +7,16 @@ import { ModeTabs } from './components/ModeTabs'
 import { ProgressLegend } from './components/ProgressLegend'
 import { Quiz } from './components/Quiz'
 import { ScriptToggle } from './components/ScriptToggle'
-import { CATEGORY_LABELS } from './data/kanaData'
 import type { KanaItem } from './data/kanaData'
 import type { StatsByKanaId, UIPreferences } from './utils/storage'
-import { defaultUIPreferences, loadStats, loadUIPreferences, resetStats, saveStats, saveUIPreferences } from './utils/storage'
+import {
+  defaultUIPreferences,
+  loadStats,
+  loadUIPreferences,
+  resetStats,
+  saveStats,
+  saveUIPreferences,
+} from './utils/storage'
 import { isSpeechSupported } from './utils/speech'
 
 function App() {
@@ -18,17 +24,26 @@ function App() {
   const [stats, setStats] = useState<StatsByKanaId>({})
   const [mode, setMode] = useState(defaultUIPreferences.lastMode)
   const [exampleItem, setExampleItem] = useState<KanaItem | undefined>()
+  const [hydrated, setHydrated] = useState(false)
 
   const speechSupported = useMemo(() => isSpeechSupported(), [])
 
   useEffect(() => {
     setPrefs(loadUIPreferences())
     setStats(loadStats())
+    setHydrated(true)
   }, [])
 
   useEffect(() => {
+    if (!hydrated) return
     saveUIPreferences({ ...prefs, lastMode: mode })
-  }, [prefs, mode])
+  }, [prefs, mode, hydrated])
+
+  useEffect(() => {
+    const root = document.documentElement
+    root.classList.toggle('dark', prefs.darkMode)
+    root.style.setProperty('color-scheme', prefs.darkMode ? 'dark' : 'light')
+  }, [prefs.darkMode])
 
   const updatePrefs = (partial: Partial<UIPreferences>) => {
     setPrefs((prev) => ({ ...prev, ...partial }))
@@ -58,13 +73,17 @@ function App() {
   const selectedCategories = prefs.selectedCategories
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-indigo-50 p-4 text-slate-900">
+    <div className="min-h-screen bg-app-with-accents p-4 text-secondary">
       <div className="mx-auto max-w-6xl space-y-6">
-        <header className="flex flex-wrap items-center justify-between gap-4 rounded-3xl bg-white/80 p-6 shadow-lg backdrop-blur">
+        <header className="flex flex-wrap items-center justify-between gap-4 rounded-3xl border border-secondary bg-secondary p-6 shadow-lg backdrop-blur dark:shadow-xl">
           <div>
-            <p className="text-sm font-semibold uppercase tracking-[0.3em] text-indigo-500">Kana Learn</p>
-            <h1 className="text-3xl font-bold text-slate-900">日文假名 練習站</h1>
-            <p className="text-sm text-slate-600">學習 / 測驗 / 聽力 三合一，支援平假名、片假名與混合模式</p>
+            <p className="text-sm font-semibold uppercase tracking-[0.3em] text-primary">
+              Kana Learn
+            </p>
+            <h1 className="text-3xl font-bold text-secondary">日文假名 練習</h1>
+            <p className="text-sm text-muted">
+              學習 / 測驗 / 聽力 三合一，支援平假名、片假名與混合模式
+            </p>
           </div>
           <div className="flex flex-col items-end gap-3">
             <ModeTabs
@@ -74,7 +93,7 @@ function App() {
                 updatePrefs({ lastMode: m })
               }}
             />
-            <div className="flex items-center gap-3 text-sm text-slate-600">
+            <div className="flex items-center gap-3 text-sm text-muted">
               <span>語速</span>
               <input
                 type="range"
@@ -83,22 +102,37 @@ function App() {
                 step={0.1}
                 value={prefs.speechRate}
                 onChange={(e) => updatePrefs({ speechRate: Number(e.target.value) })}
+                className="accent-primary"
               />
-              <span className="font-semibold text-indigo-600">{prefs.speechRate.toFixed(1)}x</span>
+              <span className="font-semibold text-primary">{prefs.speechRate.toFixed(1)}x</span>
             </div>
+            <button
+              onClick={() => updatePrefs({ darkMode: !prefs.darkMode })}
+              className="flex items-center gap-2 rounded-full border border-secondary bg-secondary px-3 py-2 text-sm font-semibold text-secondary transition hover:bg-primary hover:border-primary"
+              aria-pressed={prefs.darkMode}
+            >
+              <span className="text-lg">{prefs.darkMode ? '🌙' : '☀️'}</span>
+              {prefs.darkMode ? '深色模式' : '淺色模式'}
+            </button>
             {!speechSupported && (
-              <span className="text-xs text-rose-600">瀏覽器不支援 SpeechSynthesis，播放將停用</span>
+              <span className="text-xs text-danger">瀏覽器不支援 SpeechSynthesis，播放將停用</span>
             )}
           </div>
         </header>
 
-        <div className="rounded-3xl bg-white/80 p-6 shadow-lg backdrop-blur">
+        <div className="rounded-3xl border border-secondary bg-secondary p-6 shadow-lg backdrop-blur dark:shadow-xl">
           <div className="flex flex-wrap items-center justify-between gap-4">
-            <ScriptToggle value={prefs.scriptMode} onChange={(v) => updatePrefs({ scriptMode: v })} />
-            <CategoryFilter selected={selectedCategories} onChange={(v) => updatePrefs({ selectedCategories: v })} />
+            <ScriptToggle
+              value={prefs.scriptMode}
+              onChange={(v) => updatePrefs({ scriptMode: v })}
+            />
+            <CategoryFilter
+              selected={selectedCategories}
+              onChange={(v) => updatePrefs({ selectedCategories: v })}
+            />
             <button
               onClick={handleReset}
-              className="rounded-full border border-rose-200 px-4 py-2 text-sm font-semibold text-rose-600 hover:bg-rose-50"
+              className="rounded-full border border-danger bg-danger px-4 py-2 text-sm font-semibold text-danger hover:bg-danger"
             >
               重設進度
             </button>
@@ -108,7 +142,7 @@ function App() {
         {mode === 'learning' && (
           <div className="space-y-4">
             <div className="flex flex-wrap items-center justify-between gap-3">
-              <h2 className="text-2xl font-semibold text-slate-900">學習模式</h2>
+              <h2 className="text-2xl font-semibold text-secondary">學習模式</h2>
               <ProgressLegend />
             </div>
             <KanaTable
@@ -145,18 +179,6 @@ function App() {
             onRecordResult={recordResult}
           />
         )}
-
-        <div className="rounded-3xl bg-white/80 p-6 shadow-lg backdrop-blur">
-          <h3 className="text-xl font-semibold text-slate-900">目前類別</h3>
-          <p className="text-sm text-slate-600">支援平假名、片假名、混合出題，錯得越多會越常出現。</p>
-          <div className="mt-3 flex flex-wrap gap-2">
-            {selectedCategories.map((c) => (
-              <span key={c} className="rounded-full bg-indigo-50 px-3 py-1 text-sm text-indigo-700">
-                {CATEGORY_LABELS[c]}
-              </span>
-            ))}
-          </div>
-        </div>
       </div>
 
       <ExampleModal

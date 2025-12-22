@@ -6,6 +6,8 @@ interface Props {
   onChange: (categories: KanaCategory[]) => void
 }
 
+// 功能: 顯示假名分類篩選按鈕，允許用戶選擇多個分類
+// 包含基本、浊音、半浊音、拗音等分類
 export function CategoryFilter({ selected, onChange }: Props) {
   const toggle = (category: KanaCategory) => {
     if (selected.includes(category)) {
@@ -25,11 +27,16 @@ export function CategoryFilter({ selected, onChange }: Props) {
             onClick={() => toggle(category)}
             className={`flex items-center gap-2 rounded-full border px-4 py-2 text-sm transition ${
               active
-                ? 'border-indigo-500 bg-indigo-50 text-indigo-700 shadow'
-                : 'border-slate-200 bg-white text-slate-600 hover:border-indigo-200'
+                ? 'border-primary bg-primary text-primary shadow'
+                : 'border-secondary bg-secondary text-secondary hover:border-primary'
             }`}
           >
-            <input type="checkbox" checked={active} readOnly className="accent-indigo-600" />
+            <input
+              type="checkbox"
+              checked={active}
+              readOnly
+              className="accent-primary h-4 w-4 rounded border-primary bg-primary"
+            />
             <span>{CATEGORY_LABELS[category]}</span>
           </button>
         )

@@ -11,17 +11,20 @@ const MODES: { value: Mode; label: string }[] = [
   { value: 'listening', label: '聽力' },
 ]
 
+// 功能: 顯示模式切換標籤，允許用戶在學習、測驗和聽力模式之間切換
 export function ModeTabs({ value, onChange }: Props) {
   return (
-    <div className="inline-flex rounded-xl bg-slate-100 p-1 shadow-inner dark:bg-slate-800">
+    <div className="inline-flex rounded-xl bg-muted p-1 shadow-inner">
       {MODES.map((mode) => {
         const active = value === mode.value
         return (
           <button
             key={mode.value}
             onClick={() => onChange(mode.value)}
-            className={`px-4 py-2 text-sm font-semibold rounded-lg transition ${
-              active ? 'bg-white shadow text-indigo-600 dark:bg-slate-700' : 'text-slate-600 dark:text-slate-200'
+            className={`rounded-lg px-4 py-2 text-sm font-semibold transition ${
+              active
+                ? 'bg-secondary text-primary shadow'
+                : 'text-muted'
             }`}
           >
             {mode.label}
