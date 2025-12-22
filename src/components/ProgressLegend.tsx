@@ -5,9 +5,7 @@ export function ProgressLegend() {
   const colors = [
     { label: '需要加強', className: 'bg-[var(--color-danger)]' },
     { label: '基礎', className: 'bg-[var(--color-muted)]' },
-    { label: '進步中', className: 'bg-[var(--color-primary)]' },
     { label: '熟練', className: 'bg-[var(--color-success)]' },
-    { label: '非常熟練', className: 'bg-[var(--color-success)]' },
   ]
   return (
     <div className="flex flex-wrap items-center gap-2 text-xs text-muted">

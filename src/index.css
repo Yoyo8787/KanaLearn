@@ -38,34 +38,42 @@
 }
 
 :root.dark {
-  --color-primary: #c7d2fe;
-  --bg-primary: #1f2643;
-  --border-primary: #a5b4fc;
+  /* ===== Primary｜躑躅（Tsutsuji）粉 ===== */
+  --color-primary: #f6c1d1; /* 淡粉字 */
+  --bg-primary: rgba(224, 60, 138, 0.18); /* 粉霧底 */
+  --border-primary: #e03c8a; /* 主粉 */
 
-  --color-secondary: #e2e8f0;
-  --bg-secondary: #0f172a;
-  --border-secondary: #334155;
+  /* ===== Secondary｜藍墨（Ai / 墨藍）===== */
+  --color-secondary: #d6e0f0; /* 偏冷淡藍白 */
+  --bg-secondary: #0e1629; /* 深藍墨 */
+  --border-secondary: #24304a;
 
-  --color-muted: #94a3b8;
-  --bg-muted: #1f2937;
+  /* ===== Muted｜鼠灰・鈍色 ===== */
+  --color-muted: #9ca3af;
+  --bg-muted: #1a2233;
   --border-muted: #1f2937;
 
-  --color-success: #34d399;
-  --bg-success: #0f241b;
-  --border-success: #34d399;
+  /* ===== Success｜青竹（Aotake）===== */
+  --color-success: #6ee7b7;
+  --bg-success: rgba(17, 94, 89, 0.35);
+  --border-success: #2dd4bf;
 
-  --color-danger: #fecdd3;
-  --bg-danger: #3b0f1c;
-  --border-danger: #fda4af;
+  /* ===== Danger｜紅梅（Kōbai）===== */
+  --color-danger: #f4b4c4;
+  --bg-danger: rgba(159, 18, 57, 0.35);
+  --border-danger: #db2777;
 
-  --bg-app-start: #0b1224;
-  --bg-app-end: #0f172a;
-  --bg-app-accent: #1e293b;
-  --bg-quiz-start: #111827;
-  --bg-quiz-end: #0b1224;
+  /* ===== App Background｜夜墨＋櫻 ===== */
+  --bg-app-start: #090f1e;
+  --bg-app-end: #0b1224;
+  --bg-app-accent: rgba(224, 60, 138, 0.16);
 
-  --bg-overlay: rgba(0, 0, 0, 0.7);
-  --bg-overlay-strong: rgba(0, 0, 0, 0.8);
+  --bg-quiz-start: #0d1326;
+  --bg-quiz-end: #090f1e;
+
+  /* ===== Overlay ===== */
+  --bg-overlay: rgba(0, 0, 0, 0.72);
+  --bg-overlay-strong: rgba(0, 0, 0, 0.85);
 }
 
 body {
@@ -76,8 +84,9 @@ body {
 }
 
 .dark body {
-  background: radial-gradient(circle at 15% 20%, rgba(99, 102, 241, 0.15), transparent 30%),
-    radial-gradient(circle at 80% 10%, rgba(16, 185, 129, 0.12), transparent 25%), #0b1224;
+  background: radial-gradient(circle at 18% 22%, rgba(224, 60, 138, 0.22), transparent 34%),
+    radial-gradient(circle at 78% 12%, rgba(45, 212, 191, 0.08), transparent 30%),
+    linear-gradient(135deg, #090f1e, #0b1224);
 }
 
 * {
@@ -164,7 +173,7 @@ button:disabled {
 
   .hover\:bg-primary:hover {
     background-color: var(--color-primary);
-    color: var(--bg-primary);
+    color: var(--bg-secondary);
   }
   .hover\:bg-secondary:hover {
     background-color: var(--color-secondary);
@@ -180,7 +189,7 @@ button:disabled {
   }
   .hover\:bg-danger:hover {
     background-color: var(--color-danger);
-    color: var(--bg-danger);
+    color: var(--bg-secondary);
   }
   .hover\:border-primary:hover {
     border-color: var(--border-primary);

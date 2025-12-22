@@ -26,7 +26,7 @@ export function ExampleModal({ item, open, onClose, speechRate, speechSupported 
       >
         <div className="flex items-start justify-between gap-2">
           <div>
-            <p className="text-sm uppercase tracking-widest text-primary">例詞</p>
+            <p className="text-sm uppercase tracking-widest text-primary mb-2">例詞</p>
             <h3 className="text-4xl font-bold text-secondary">
               {item.hiragana}・{item.katakana}
             </h3>
@@ -40,8 +40,8 @@ export function ExampleModal({ item, open, onClose, speechRate, speechSupported 
           </button>
         </div>
 
-        <div className="mt-4 rounded-xl border border-secondary bg-muted p-4 space-y-0.5 ">
-          <p className="text-2xl font-semibold text-secondary">{item.example.word}</p>
+        <div className="mt-4 rounded-xl border border-secondary bg-muted p-4 ">
+          <p className="text-2xl font-semibold text-secondary mb-1">{item.example.word}</p>
           <p className="text-sm text-secondary">讀音：{item.example.reading}</p>
           <p className="text-sm text-muted">意思：{item.example.meaning}</p>
         </div>

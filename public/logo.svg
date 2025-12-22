@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 160" role="img" aria-label="Torii icon">
+  <g fill="#e03c8a">
+    <!-- top roof -->
+    <rect x="20" y="24" width="160" height="18" rx="9"/>
+    <!-- upper beam -->
+    <rect x="44" y="48" width="112" height="14" rx="7"/>
+    <!-- pillars -->
+    <rect x="56" y="62" width="20" height="78" rx="10"/>
+    <rect x="124" y="62" width="20" height="78" rx="10"/>
+    <!-- center beam -->
+    <rect x="84" y="104" width="32" height="12" rx="6"/>
+  </g>
+</svg>
