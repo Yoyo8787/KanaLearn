@@ -64,14 +64,13 @@ function App() {
 
   return (
     <div className="min-h-screen bg-app-with-accents p-4 text-secondary">
-      <div className="mx-auto max-w-6xl space-y-6">
-        <header className="flex flex-wrap items-center justify-between gap-4 rounded-3xl border border-secondary bg-secondary p-6 shadow-lg backdrop-blur dark:shadow-xl">
+      <div className="mx-auto max-w-6xl space-y-6 pb-48 md:pb-24">
+        <header className="flex flex-wrap items-center justify-between gap-4 rounded-3xl border-b border-secondary pb-6  backdrop-blur dark:shadow-xl">
           <div>
-            <p className="text-sm font-semibold uppercase tracking-[0.3em] text-primary">
+            <h1 className="text-xl font-semibold uppercase tracking-[0.2em] text-primary">
               Kana Learn
-            </p>
-            <h1 className="text-3xl font-bold text-secondary">日文假名 練習</h1>
-            <p className="text-sm text-muted">
+            </h1>
+            <p className="text-sm text-muted hidden md:inline">
               學習 / 測驗 / 聽力 三合一，支援平假名、片假名與混合模式
             </p>
           </div>
@@ -79,6 +78,7 @@ function App() {
             <ModeTabs
               value={mode}
               onChange={(m) => updatePrefs({ lastMode: m })}
+              className="hidden md:inline-flex"
             />
             <ScriptToggle
               value={prefs.scriptMode}
@@ -138,6 +138,11 @@ function App() {
         onClose={() => setExampleItem(undefined)}
         speechRate={prefs.speechRate}
         speechSupported={speechSupported}
+      />
+      <ModeTabs
+        value={mode}
+        onChange={(m) => updatePrefs({ lastMode: m })}
+        className="fixed! left-1/2 -translate-x-1/2 bottom-2 h-16 w-11/12 md:hidden border border-primary inline-flex "
       />
     </div>
   )

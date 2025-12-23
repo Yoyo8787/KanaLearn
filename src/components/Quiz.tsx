@@ -106,9 +106,7 @@ export function Quiz({
 
   if (pool.length === 0) {
     return (
-      <p className="rounded-lg bg-danger p-4 text-sm text-danger">
-        請至少選擇一個類別開始測驗。
-      </p>
+      <p className="rounded-lg bg-danger p-4 text-sm text-danger">請至少選擇一個類別開始測驗。</p>
     )
   }
 
@@ -117,7 +115,7 @@ export function Quiz({
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div>
           <p className="text-sm text-muted">目前題庫：{pool.length} 題</p>
-          <h3 className="text-2xl font-semibold text-secondary">測驗</h3>
+          <h3 className="text-xl font-semibold text-secondary">測驗</h3>
         </div>
         <div className="flex items-center gap-2 text-sm">
           {optionsForQuizType.map((opt) => (
@@ -199,9 +197,7 @@ export function Quiz({
             >
               下一題
             </button>
-            {feedback && (
-              <span className="text-sm font-semibold text-primary">{feedback}</span>
-            )}
+            {feedback && <span className="text-sm font-semibold text-primary">{feedback}</span>}
           </div>
         </div>
       )}

@@ -1,5 +1,5 @@
 import { Fragment } from 'react'
-import { CATEGORY_LABELS, KANA_TABLE_BASIC } from '../data/kanaData'
+import { KANA_TABLE_BASIC } from '../data/kanaData'
 import type { KanaCategory, KanaItem, ScriptMode, TableCell } from '../data/kanaData'
 import { computeMastery, masteryColor } from '../utils/mastery'
 import type { StatsByKanaId } from '../utils/storage'
@@ -79,8 +79,8 @@ export function KanaTable({
 
   return (
     <div className="overflow-x-auto">
-      <div className="min-w-175 rounded-2xl border border-secondary bg-secondary p-4 shadow-md dark:shadow-xl">
-        <div className="grid grid-cols-[60px_repeat(5,minmax(0,1fr))] items-center gap-2 text-sm font-semibold text-muted">
+      <div className="rounded-2xl border border-secondary bg-secondary p-2 shadow-md dark:shadow-xl">
+        <div className="grid grid-cols-[1.5rem_repeat(5,minmax(0,1fr))] items-center gap-2 text-sm font-semibold text-muted">
           <div></div>
           {vowelHeaders.map((v) => (
             <div key={v} className="text-center uppercase">
@@ -88,27 +88,15 @@ export function KanaTable({
             </div>
           ))}
         </div>
-        <div className="mt-2 grid grid-cols-[60px_repeat(5,minmax(0,1fr))] items-center gap-2">
+        <div className="mt-2 grid grid-cols-[1.5rem_repeat(5,minmax(0,1fr))] items-center gap-2">
           {KANA_TABLE_BASIC.map((row, rowIndex) => (
             <Fragment key={rowIndex}>
-              <div className="text-center font-semibold uppercase text-muted">
+              <div className="text-center font-semibold uppercase text-muted text-sm">
                 {['a', 'ka', 'sa', 'ta', 'na', 'ha', 'ma', 'ya', 'ra', 'wa', 'n'][rowIndex]}
               </div>
               {row.map((cell, colIndex) => renderCell(cell, rowIndex, colIndex))}
             </Fragment>
           ))}
-        </div>
-        <p className="mt-4 text-xs text-muted">灰色表示未選擇的類別，可透過類別過濾勾選啟用。</p>
-        <div className="mt-4 rounded-xl border border-secondary bg-muted p-4 text-sm text-secondary">
-          <p className="font-semibold">其他類別</p>
-          <p>濁音、半濁音、拗音等會出現在測驗/聽力題庫中，開啟類別即可練習。</p>
-          <div className="mt-2 flex flex-wrap gap-2 text-xs text-muted">
-            {Object.entries(CATEGORY_LABELS).map(([key, label]) => (
-              <span key={key} className="rounded-full bg-secondary px-3 py-1 text-secondary shadow">
-                {label}
-              </span>
-            ))}
-          </div>
         </div>
       </div>
     </div>

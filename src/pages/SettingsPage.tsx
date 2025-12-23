@@ -13,7 +13,7 @@ export function SettingsPage({ prefs, speechSupported, onUpdatePrefs, onResetSta
     <div className="space-y-4">
       <div className="rounded-3xl border border-secondary bg-secondary p-6 shadow-lg backdrop-blur dark:shadow-xl">
         <div className="flex flex-col gap-6">
-          <h2 className="text-2xl font-semibold text-secondary">設定</h2>
+          <h3 className="text-xl font-semibold text-secondary">設定</h3>
           <div className="grid gap-4">
             <div className="grid gap-4 rounded-2xl border border-secondary bg-muted p-4 md:grid-cols-[1fr_auto] md:items-center">
               <div className="space-y-1">

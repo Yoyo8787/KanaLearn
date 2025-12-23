@@ -78,7 +78,7 @@ export function Listening({
     <div className="rounded-2xl border border-secondary bg-secondary p-6 shadow-lg dark:shadow-xl">
       <div className="flex items-center justify-between gap-3">
         <div>
-          <h3 className="text-2xl font-semibold text-secondary">聽力</h3>
+          <h3 className="text-xl font-semibold text-secondary">聽力</h3>
         </div>
       </div>
 

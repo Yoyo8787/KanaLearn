@@ -23,7 +23,7 @@ export function LearningPage({
   return (
     <div className="space-y-4">
       <div className="flex flex-wrap items-center justify-between gap-3">
-        <h2 className="text-2xl font-semibold text-secondary">學習模式</h2>
+        <h2 className="text-xl font-semibold text-secondary">學習模式</h2>
         <ProgressLegend />
       </div>
       <KanaTable
