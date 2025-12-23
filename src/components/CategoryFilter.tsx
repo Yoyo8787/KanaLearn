@@ -18,7 +18,7 @@ export function CategoryFilter({ selected, onChange }: Props) {
   }
 
   return (
-    <div className="flex flex-wrap gap-2">
+    <div className="grid grid-cols-2 md:grid-cols-4 gap-2  max-w-xl">
       {(Object.keys(CATEGORY_LABELS) as KanaCategory[]).map((category) => {
         const active = selected.includes(category)
         return (
