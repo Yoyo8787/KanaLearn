@@ -65,9 +65,9 @@ function App() {
   return (
     <div className="min-h-screen bg-app-with-accents p-4 text-secondary">
       <div className="mx-auto max-w-6xl space-y-6 pb-48 md:pb-24">
-        <header className="flex flex-wrap items-center justify-between gap-4 rounded-3xl border-b border-secondary pb-6  backdrop-blur dark:shadow-xl">
+        <header className="flex flex-wrap items-center justify-between gap-4 rounded-3xl border-b border-secondary pb-6 pt-2  backdrop-blur dark:shadow-xl">
           <div>
-            <h1 className="text-xl font-semibold uppercase tracking-[0.2em] text-primary">
+            <h1 className="text-2xl font-semibold uppercase tracking-[0.2em] text-primary">
               Kana Learn
             </h1>
             <p className="text-sm text-muted hidden md:inline">

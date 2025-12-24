@@ -495,6 +495,8 @@ const dakuten: KanaItem[] = [
   { id: 'ze', category: 'dakuten', row: 1, col: 3, hiragana: 'ぜ', katakana: 'ゼ', romaji: 'ze', example: { word: 'ぜんぶ', reading: 'zenbu', meaning: '全部' } },
   { id: 'zo', category: 'dakuten', row: 1, col: 4, hiragana: 'ぞ', katakana: 'ゾ', romaji: 'zo', example: { word: 'ぞう', reading: 'zou', meaning: '大象' } },
   { id: 'da', category: 'dakuten', row: 2, col: 0, hiragana: 'だ', katakana: 'ダ', romaji: 'da', example: { word: 'だいがく', reading: 'daigaku', meaning: '大學' } },
+  { id: 'di', category: 'dakuten', row: 2, col: 1, hiragana: 'ぢ', katakana: 'ヂ', romaji: 'di', example: { word: 'はなぢ', reading: 'hanaji', meaning: '流鼻血' } },
+  { id: 'du', category: 'dakuten', row: 2, col: 2, hiragana: 'づ', katakana: 'ヅ', romaji: 'du', example: { word: 'つづく', reading: 'tsuzuku', meaning: '持續' } },
   { id: 'de', category: 'dakuten', row: 2, col: 3, hiragana: 'で', katakana: 'デ', romaji: 'de', example: { word: 'でんしゃ', reading: 'densha', meaning: '電車' } },
   { id: 'do', category: 'dakuten', row: 2, col: 4, hiragana: 'ど', katakana: 'ド', romaji: 'do', example: { word: 'どうぞ', reading: 'douzo', meaning: '請用' } },
   { id: 'ba', category: 'dakuten', row: 3, col: 0, hiragana: 'ば', katakana: 'バ', romaji: 'ba', example: { word: 'ばす', reading: 'basu', meaning: '巴士' } },
@@ -534,6 +536,18 @@ const youon: KanaItem[] = [
   { id: 'rya', category: 'youon', row: 6, col: 0, hiragana: 'りゃ', katakana: 'リャ', romaji: 'rya', example: { word: 'りゃく', reading: 'ryaku', meaning: '省略' } },
   { id: 'ryu', category: 'youon', row: 6, col: 1, hiragana: 'りゅ', katakana: 'リュ', romaji: 'ryu', example: { word: 'りゅう', reading: 'ryuu', meaning: '龍/流派' } },
   { id: 'ryo', category: 'youon', row: 6, col: 2, hiragana: 'りょ', katakana: 'リョ', romaji: 'ryo', example: { word: 'りょこう', reading: 'ryokou', meaning: '旅行' } },
+  { id: 'gya', category: 'youon', row: 7, col: 0, hiragana: 'ぎゃ', katakana: 'ギャ', romaji: 'gya', example: { word: 'ぎゃく', reading: 'gyaku', meaning: '相反/反向' } },
+  { id: 'gyu', category: 'youon', row: 7, col: 1, hiragana: 'ぎゅ', katakana: 'ギュ', romaji: 'gyu', example: { word: 'ぎゅうにく', reading: 'gyuuniku', meaning: '牛肉' } },
+  { id: 'gyo', category: 'youon', row: 7, col: 2, hiragana: 'ぎょ', katakana: 'ギョ', romaji: 'gyo', example: { word: 'ぎょかい', reading: 'gyokai', meaning: '魚介類' } },
+  { id: 'ja', category: 'youon', row: 8, col: 0, hiragana: 'じゃ', katakana: 'ジャ', romaji: 'ja', example: { word: 'じゃがいも', reading: 'jagaimo', meaning: '馬鈴薯' } },
+  { id: 'ju', category: 'youon', row: 8, col: 1, hiragana: 'じゅ', katakana: 'ジュ', romaji: 'ju', example: { word: 'じゅうどう', reading: 'juudou', meaning: '柔道' } },
+  { id: 'jo', category: 'youon', row: 8, col: 2, hiragana: 'じょ', katakana: 'ジョ', romaji: 'jo', example: { word: 'じょうず', reading: 'jouzu', meaning: '擅長/厲害' } },
+  { id: 'bya', category: 'youon', row: 9, col: 0, hiragana: 'びゃ', katakana: 'ビャ', romaji: 'bya', example: { word: 'びゃくや', reading: 'byakuya', meaning: '白夜' } },
+  { id: 'byu', category: 'youon', row: 9, col: 1, hiragana: 'びゅ', katakana: 'ビュ', romaji: 'byu', example: { word: 'びゅうびゅう', reading: 'byuubyuu', meaning: '呼嘯聲' } },
+  { id: 'byo', category: 'youon', row: 9, col: 2, hiragana: 'びょ', katakana: 'ビョ', romaji: 'byo', example: { word: 'びょうき', reading: 'byouki', meaning: '疾病' } },
+  { id: 'pya', category: 'youon', row: 10, col: 0, hiragana: 'ぴゃ', katakana: 'ピャ', romaji: 'pya', example: { word: 'ぴゃー', reading: 'pyaa', meaning: '尖叫聲' } },
+  { id: 'pyu', category: 'youon', row: 10, col: 1, hiragana: 'ぴゅ', katakana: 'ピュ', romaji: 'pyu', example: { word: 'ぴゅうぴゅう', reading: 'pyuupyu', meaning: '呼呼風聲' } },
+  { id: 'pyo', category: 'youon', row: 10, col: 2, hiragana: 'ぴょ', katakana: 'ピョ', romaji: 'pyo', example: { word: 'ぴょん', reading: 'pyon', meaning: '跳躍聲' } },
 ]
 
 export const KANA_ITEMS: KanaItem[] = [...basicItems, ...dakuten, ...handakuten, ...youon]
